@@ -282,7 +282,7 @@ function initTask(subTask) {
 	}
 	
 	element[0].onclick = function(event) {
-	    console.log("TODO : APPLY RULE");
+	    apply_rule(iRule)
 	}
 
 
