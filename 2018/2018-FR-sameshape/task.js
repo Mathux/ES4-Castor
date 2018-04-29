@@ -25,8 +25,57 @@ function initTask(subTask) {
             target: ["triangle", "triangle", "triangle"]
 	},
 	medium: {
+            start: ["hexagon", "diamond", "circle", "hexagon", "hexagon"],
+            rules: [
+		{
+		    oldPattern: ["star","diamond"],
+		    newPattern: ["triangle", "triangle"]
+		},
+		{
+		    oldPattern: ["circle","hexagon"],
+		    newPattern: ["triangle", "triangle"]
+		},
+		{
+		    oldPattern: ["hexagon","hexagon"],
+		    newPattern: ["hexagon", "triangle"]
+		},
+		{
+		    oldPattern: ["hexagon"],
+		    newPattern: ["star"]
+		}
+            ],
+            target: ["triangle", "triangle", "triangle", "triangle", "triangle"]
 	},
 	hard: {
+            start: ["triangle", "hexagon", "circle", "diamond", "star"],
+            rules: [
+		{
+		    oldPattern: ["hexagon", "circle", "diamond"],
+		    newPattern: ["hexagon", "circle", "hexagon"]
+		},
+		{
+		    oldPattern: ["circle","diamond", "star"],
+		    newPattern: ["circle", "diamond"]
+		},
+		{
+		    oldPattern: ["diamond","star"],
+		    newPattern: ["diamond", "circle", "circle"]
+		},
+		{
+		    oldPattern: ["circle", "circle"],
+		    newPattern: ["circle"]
+		},
+		{
+                    oldPattern: ["triangle", "circle"],
+                    newPattern: []
+		},
+		{
+                    oldPattern: ["hexagon"],
+                    newPattern: ["triangle"]
+		}
+            ],
+            target: []
+
 	}
     };
 
@@ -45,7 +94,7 @@ function initTask(subTask) {
 	cellDiameter: 45,
 	shapeSpacing: 35,
 	shapeDiameter: 30,
-	resultCenterX: 210,
+	resultCenterX: 25,
 	resultCenterY: 25,
 	rulesCenterY: 110,
 	targetCenterX: 150,
@@ -339,6 +388,43 @@ function initTask(subTask) {
 	return set;
     };
 
+    
+    var apply_rule = function (index)
+    {
+        var res = false;
+        var from = levelRules[index].oldPattern;
+        var to = levelRules[index].newPattern;
+        var i = 0;
+        while (i < answer.length)
+        {
+            var ok = true;
+            for (var j = 0; j < from.length; j++)
+            {
+                if (i+j >= answer.length)
+                {
+                    ok = false;
+                    break;
+                }
+                if (answer[i+j] != from[j])
+                {
+                    ok = false;
+                    break;
+                }
+            }
+            if (ok)
+            {
+                answer.splice(i,from.length, ...to);
+                i += to.length;
+                res = true;
+            }
+            else
+                i++;
+        }
+        if (res)
+            refreshResult();
+    }
+
+    
     var refreshResult = function() {
         removeVisualResult();
         visualResult = [];
