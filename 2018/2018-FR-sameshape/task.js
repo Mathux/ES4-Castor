@@ -164,10 +164,10 @@ function initTask(subTask) {
     };
 
     subTask.reloadAnswerObject = function(answerObj) {
-        if(answerObj == null) {
-            answer = subTask.getDefaultAnswerObject();
-        }
-        answer = answerObj;
+	if(answerObj === null) {
+		answer = subTask.getDefaultAnswerObject();
+	}
+	answer = answerObj;
     };
 
     subTask.resetDisplay = function() {
@@ -209,6 +209,7 @@ function initTask(subTask) {
 		newPattern: $.map(rule.newPattern, function(shape) { return permutationObject[shape]; })
             };
 	});
+	randomGenerator.shuffle(levelRules);
     };
 
     var initPaper = function() {
@@ -228,7 +229,7 @@ function initTask(subTask) {
             };
 	}
 
-	initResult();
+	refreshResult();
 	for(var iRule = 0; iRule < levelRules.length; iRule++) {
             initRule(iRule);
 	}
@@ -286,11 +287,6 @@ function initTask(subTask) {
 	}
 
 
-    };
-
-    var initResult = function() {
-        answer = subTask.getDefaultAnswerObject();
-        refreshResult();
     };
 
     var initTarget = function() {
@@ -413,7 +409,13 @@ function initTask(subTask) {
             }
             if (ok)
             {
-                answer.splice(i,from.length, ...to);
+				// answer.splice(i,from.length, ...to); // SPREAD OPERATOR NOT SUPPORTED IN IE6
+				answer.splice(i,from.length);
+				for (var j = 0; j < to.length; j++)
+				{
+					answer.splice(i+j,0,to[j]);
+				}
+
                 i += to.length;
                 res = true;
             }
