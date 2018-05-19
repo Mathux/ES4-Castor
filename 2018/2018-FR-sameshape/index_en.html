@@ -46,10 +46,10 @@
       success: "Success!",
 
       rulePrefix: function(index) {
-      return "" + (index + 1) + ". Replace each";
+      return /*"" + (index + 1) + ". " + */ "Replace each";
       },
       removePrefix: function(index) {
-      return "" + (index + 1) + ". Remove each";
+      return /*"" + (index + 1) + ". " + */ "Remove each";
       },
       ruleInfix: "with",
       ruleSuffix: "Result:",
@@ -88,8 +88,33 @@
       </div>
     </div><!-- task -->
     <div id="solution">
-
+      
       <h2>Solution</h2>
+
+      <style>
+      .solutionInstanceMismatch {
+        font-style: italic;
+      }
+      </style>
+
+      <div class="easy">
+      </div>   
+      <div class="medium">
+      </div>
+      <div class="hard">
+      </div>
+
+      <h2>It's computer science !</h2>
+
+      In computer science, pattern recognition and transformation plays a major role : these rules are called <b>rewriting rules</b> !<br><br>
+
+      They are very useful to enable computers to recognize programming languages: it is called <b>parsing</b>.<br>
+      Indeed, a language syntax can be defined with a set of rewriting rules that we call <b>grammar</b>.<br><br>
+
+      They can also be used to model many phenomenon: for instance, chemical or biological transformations.<br><br>
+
+      Actually, everything that can be computed with a computer can also be computed with only rewriting rules.<br>
+      There exists a theorical programming language that is only based on rewriting : the <b>lambda-calculus</b>.
 
   </body>
 </html>

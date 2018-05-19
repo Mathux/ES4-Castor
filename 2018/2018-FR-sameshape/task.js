@@ -131,7 +131,7 @@ function initTask(subTask) {
 
     var textParams = {
 		startY: shapeParams.rulesCenterY,
-		ruleX: 3,
+		ruleX: 5,
 		ruleYSpacing: 70,
 		textShapePadX: 9,
 		textSuffixPadX: 10,
@@ -278,7 +278,7 @@ function initTask(subTask) {
 		}
 		
 		var element;
-		element = paper.rect(textParams.ruleX-2, centerY-shapeParams.cellDiameter/2, leftX, shapeParams.cellDiameter)
+		element = paper.rect(textParams.ruleX-4, centerY-shapeParams.cellDiameter/2, leftX, shapeParams.cellDiameter)
 		element.attr({"stroke-width": 2, fill: color_rules_white, opacity : opacity_rules_white});
 		
 		element[0].onmouseenter = function(event) {
@@ -299,7 +299,7 @@ function initTask(subTask) {
 		var centerY = textParams.startY + textParams.ruleYSpacing * levelRules.length;
 		var prefix = paper.text(leftX, centerY, taskStrings.undo).attr(textParams.attr);
 		
-		element = paper.rect(textParams.ruleX-2, centerY-shapeParams.cellDiameter/2, prefix.getBBox().width+4, shapeParams.cellDiameter)
+		element = paper.rect(textParams.ruleX-4, centerY-shapeParams.cellDiameter/2, prefix.getBBox().width+6, shapeParams.cellDiameter)
 		element.attr({"stroke-width": 2, fill: color_rules_white, opacity : opacity_rules_white});
 		
 		element[0].onmouseenter = function(event) {

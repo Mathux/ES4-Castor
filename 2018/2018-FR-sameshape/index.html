@@ -48,10 +48,10 @@
       success: "Bravo, vous avez réussi !",
 
       rulePrefix: function(index) {
-      return "" + (index + 1) + ". Remplace chaque";
+      return /*"" + (index + 1) + ". " + */ "Remplace chaque";
       },
       removePrefix: function(index) {
-      return "" + (index + 1) + ". Enlever chaque";
+      return /*"" + (index + 1) + ". " + */ "Enleve chaque";
       },
       ruleInfix: "par",
       ruleSuffix: "Résultat :",
@@ -94,9 +94,9 @@
       <h2>Solution</h2>
 
       <style>
-	.solutionInstanceMismatch {
-	font-style: italic;
-	}
+      .solutionInstanceMismatch {
+        font-style: italic;
+      }
       </style>
 
       <div class="easy">
@@ -105,6 +105,19 @@
       </div>
       <div class="hard">
       </div>
+
+      <h2>C'est de l'informatique !</h2>
+
+      En informatique, la reconnaissance de motifs et leur transformation joue un rôle central: on appelle ces règles des <b>règles de réécriture</b> !<br><br>
+
+      Elles sont très utiles pour pemettre à l'ordinateur de reconnaître un language de programmation : cela s'appelle le <b>parsing</b>.<br>
+      En effet, la syntaxe d'un language de programmation peut être définie par un ensemble de règles de réécriture qui forme alors une <b>grammaire</b>.<br><br>
+
+      Elles peuvent également être utilisées pour modéliser de nombreux phénomènes, comme par exemple des transformations chimiques ou biologiques.<br><br>
+
+      En réalité, tout ce qui est calculable par un ordinateur peut également être calculé simplement avec des règles de réécriture.<br>
+      Il existe d'ailleurs un langage de programmation théorique uniquement basé sur de la réécriture : le <b>lambda-calcul</b>.
+
     </div> <!-- task-solution -->
   </body>
 </html>
