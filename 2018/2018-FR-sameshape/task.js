@@ -94,10 +94,10 @@ function initTask(subTask) {
 	cellDiameter: 45,
 	shapeSpacing: 35,
 	shapeDiameter: 30,
-	resultCenterX: 25,
+	resultCenterX: 10,
 	resultCenterY: 25,
 	rulesCenterY: 110,
-	targetCenterX: 150,
+	targetCenterX: 750,
 	slotAttr: {
             "stroke-width": 2,
             fill: "#DDDDDD"
@@ -216,8 +216,8 @@ function initTask(subTask) {
 	};
 
 	var initPaper = function() {
-		textParams.targetY = textParams.startY + textParams.ruleYSpacing * (levelRules.length+1); 
-		paperHeight = textParams.targetY + shapeParams.shapeDiameter;
+		textParams.targetY = shapeParams.resultCenterY;
+		paperHeight = textParams.startY + textParams.ruleYSpacing * (levelRules.length+1); 
 
 		paper = subTask.raphaelFactory.create("anim", "anim", paperWidth, paperHeight);
 
@@ -243,7 +243,7 @@ function initTask(subTask) {
 
     var initSeparators = function() {
 		paper.path(["M", 0, shapeParams.rulesCenterY - 40, "H", paperWidth]).attr(separatorParams.attr);
-		paper.path(["M", 0, textParams.targetY - 30, "H", paperWidth]).attr(separatorParams.attr);
+		paper.path(["M", 0, paperHeight - 30, "H", paperWidth]).attr(separatorParams.attr);
     };
 
     var initRule = function(iRule) {
@@ -299,7 +299,7 @@ function initTask(subTask) {
 		var centerY = textParams.startY + textParams.ruleYSpacing * levelRules.length;
 		var prefix = paper.text(leftX, centerY, taskStrings.undo).attr(textParams.attr);
 		
-		element = paper.rect(textParams.ruleX-2, centerY-shapeParams.cellDiameter/2, prefix.getBBox().width+2, shapeParams.cellDiameter)
+		element = paper.rect(textParams.ruleX-2, centerY-shapeParams.cellDiameter/2, prefix.getBBox().width+4, shapeParams.cellDiameter)
 		element.attr({"stroke-width": 2, fill: color_rules_white, opacity : opacity_rules_white});
 		
 		element[0].onmouseenter = function(event) {
@@ -316,9 +316,11 @@ function initTask(subTask) {
 	};
 
     var initTarget = function() {
-		paper.text(shapeParams.targetCenterX - textParams.textShapePadX, textParams.targetY, taskStrings.target).attr(textParams.attr).attr(textParams.targetAttr);
+		var targetCenterX = shapeParams.targetCenterX - textParams.textShapePadX - (levelTarget.length * shapeParams.shapeSpacing);
 
-		var targetCenterX = shapeParams.targetCenterX + (levelTarget.length * shapeParams.shapeSpacing / 2);
+		paper.text(targetCenterX, textParams.targetY, taskStrings.target).attr(textParams.attr).attr(textParams.targetAttr);
+
+		targetCenterX = shapeParams.targetCenterX - (levelTarget.length * shapeParams.shapeSpacing / 2);
 
 		createShapeArray(levelTarget, targetCenterX, textParams.targetY, "target");
     };
@@ -329,11 +331,11 @@ function initTask(subTask) {
 				leftX = centerX - (array.length * shapeParams.cellDiameter) / 2;
 				var elements = Beav.Array.init(array.length, drawSlot);
 				var positions = Beav.Array.init(array.length, function(index) {
-			return [
-				leftX + shapeParams.cellDiameter / 2 + (shapeParams.cellDiameter * index),
-				centerY
-			];
-				});
+				return [
+					leftX + shapeParams.cellDiameter / 2 + (shapeParams.cellDiameter * index),
+					centerY
+				];
+			});
 		}
 		else {
 				leftX = centerX - (array.length * shapeParams.shapeSpacing) / 2;
