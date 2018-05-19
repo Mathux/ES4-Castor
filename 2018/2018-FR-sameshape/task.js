@@ -2,7 +2,7 @@ function initTask(subTask) {
     var state = {};
     var level;
     var answer = null;
-    var bank = ["diamond", "circle", "triangle", "hexagon", "star"];
+    var bank = ["diamond", "circle", "triangle", "hexagon", "star", "square"];
     var paperWidth = 760;
     var paperHeight = null; // calculated
     var data = {
@@ -47,7 +47,7 @@ function initTask(subTask) {
             target: ["triangle", "triangle", "triangle", "triangle", "triangle"]
 	},
 	hard: {
-            start: ["triangle", "hexagon", "circle", "diamond", "star"],
+            start: ["triangle", "hexagon", "circle", "diamond", "star", "square"],
             rules: [
 		{
 		    oldPattern: ["hexagon", "circle", "diamond"],
@@ -66,22 +66,22 @@ function initTask(subTask) {
 		    newPattern: ["circle"]
 		},
 		{
-                    oldPattern: ["triangle", "circle"],
-                    newPattern: []
+			oldPattern: ["triangle", "circle"],
+			newPattern: []
 		},
 		{
-                    oldPattern: ["hexagon"],
-                    newPattern: ["triangle"]
+			oldPattern: ["hexagon"],
+			newPattern: ["triangle"]
 		}
             ],
-            target: []
+            target: ["square"]
 
 	}
     };
 
-    var opacity_rules_black = 0.5
+    var opacity_rules_black = 0.4
     var opacity_rules_white = 0.3
-    var color_rules_white = "blue"
+    var color_rules_white = "white"
     var color_rules_black = "green"
     
     var paper;
@@ -122,7 +122,10 @@ function initTask(subTask) {
 			"stroke-width": 1,
 			fill: "black",
 			r: 2
-            }
+			},
+		square: {
+			fill: "grey"
+			}
 		}
     };
 
@@ -244,11 +247,13 @@ function initTask(subTask) {
     };
 
     var initRule = function(iRule) {
+
+		var prefixText = levelRules[iRule].newPattern.length > 0 ? taskStrings.rulePrefix(iRule) : taskStrings.removePrefix(iRule);
+
 		// Prefix.
 		var leftX = textParams.ruleX;
 		var centerY = textParams.startY + textParams.ruleYSpacing * (iRule);
-		var prefix = paper.text(leftX, centerY, taskStrings.rulePrefix(iRule)).attr(textParams.attr);
-		
+		var prefix = paper.text(leftX, centerY, prefixText).attr(textParams.attr);
 		leftX += prefix.getBBox().width + textParams.textShapePadX;
 		
 		// Old pattern.
@@ -258,21 +263,22 @@ function initTask(subTask) {
 		createShapeArray(array, centerX, centerY, "rule_" + iRule + "_old");
 		leftX += arrayWidth + textParams.textShapePadX;
 
-		// Infix.
-		var infix = paper.text(leftX, centerY, taskStrings.ruleInfix).attr(textParams.attr);
-		leftX += infix.getBBox().width + textParams.textShapePadX;
+		if (levelRules[iRule].newPattern.length > 0)
+		{
+			// Infix.
+			var infix = paper.text(leftX, centerY, taskStrings.ruleInfix).attr(textParams.attr);
+			leftX += infix.getBBox().width + textParams.textShapePadX;
 
-		// New pattern.
-		array = levelRules[iRule].newPattern;
-		arrayWidth = array.length * shapeParams.cellDiameter;
-		centerX = leftX + arrayWidth / 2;
-		createShapeArray(array, centerX, centerY, "rule_" + iRule + "_new");
-
-		var radius = shapeParams.shapeDiameter / 1;
+			// New pattern.
+			array = levelRules[iRule].newPattern;
+			arrayWidth = array.length * shapeParams.cellDiameter;
+			centerX = leftX + arrayWidth / 2;
+			createShapeArray(array, centerX, centerY, "rule_" + iRule + "_new");
+			leftX += arrayWidth;
+		}
 		
 		var element;
-		//element = paper.circle(centerX + arrayWidth / 1.5, centerY, radius);
-		element = paper.rect(textParams.ruleX-2, centerY-shapeParams.cellDiameter/2, leftX + arrayWidth, shapeParams.cellDiameter)
+		element = paper.rect(textParams.ruleX-2, centerY-shapeParams.cellDiameter/2, leftX, shapeParams.cellDiameter)
 		element.attr({"stroke-width": 2, fill: color_rules_white, opacity : opacity_rules_white});
 		
 		element[0].onmouseenter = function(event) {
@@ -396,6 +402,9 @@ function initTask(subTask) {
 				element.push(paper.circle(-8, 0));
 				element.push(paper.circle(8, 0));
 		}
+		else if(shape == "square") {
+			element = paper.rect(-radius*0.95, -radius*0.95, 2*radius*0.95, 2*radius*0.95);
+	}
 
 		if(shapeParams.shapeAttr[shape]) {
 				element.attr(shapeParams.shapeAttr[shape]);
