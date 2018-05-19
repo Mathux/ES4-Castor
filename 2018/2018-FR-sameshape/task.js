@@ -9,70 +9,70 @@ function initTask(subTask) {
 	easy: {
             start: ["diamond", "circle", "hexagon"],
             rules: [
-		{
-		    oldPattern: ["circle","hexagon"],
-		    newPattern: ["triangle", "triangle"]
-		},
-		{
+				{
                     oldPattern: ["diamond","circle"],
                     newPattern: ["triangle", "hexagon"]
-		},
-		{
+				},
+				{
                     oldPattern: ["hexagon","hexagon"],
                     newPattern: ["triangle", "triangle"]
-		}
+				},
+				{
+					oldPattern: ["circle","hexagon"],
+					newPattern: ["triangle", "triangle"]
+				}
             ],
             target: ["triangle", "triangle", "triangle"]
 	},
 	medium: {
             start: ["hexagon", "diamond", "circle", "hexagon", "hexagon"],
             rules: [
-		{
-		    oldPattern: ["star","diamond"],
-		    newPattern: ["triangle", "triangle"]
-		},
-		{
-		    oldPattern: ["circle","hexagon"],
-		    newPattern: ["triangle", "triangle"]
-		},
-		{
-		    oldPattern: ["hexagon","hexagon"],
-		    newPattern: ["hexagon", "triangle"]
-		},
-		{
-		    oldPattern: ["hexagon"],
-		    newPattern: ["star"]
-		}
+			{
+				oldPattern: ["star","diamond"],
+				newPattern: ["triangle", "triangle"]
+			},
+			{
+				oldPattern: ["circle","hexagon"],
+				newPattern: ["triangle", "triangle"]
+			},
+			{
+				oldPattern: ["hexagon","hexagon"],
+				newPattern: ["hexagon", "triangle"]
+			},
+			{
+				oldPattern: ["hexagon"],
+				newPattern: ["star"]
+			}
             ],
             target: ["triangle", "triangle", "triangle", "triangle", "triangle"]
 	},
 	hard: {
             start: ["triangle", "hexagon", "circle", "diamond", "star", "square"],
             rules: [
-		{
-		    oldPattern: ["hexagon", "circle", "diamond"],
-		    newPattern: ["hexagon", "circle", "hexagon"]
-		},
-		{
-		    oldPattern: ["circle","diamond", "star"],
-		    newPattern: ["circle", "diamond"]
-		},
-		{
-		    oldPattern: ["diamond","star"],
-		    newPattern: ["diamond", "circle", "circle"]
-		},
-		{
-		    oldPattern: ["circle", "circle"],
-		    newPattern: ["circle"]
-		},
-		{
-			oldPattern: ["triangle", "circle"],
-			newPattern: []
-		},
-		{
-			oldPattern: ["hexagon"],
-			newPattern: ["triangle"]
-		}
+			{
+				oldPattern: ["hexagon", "circle", "diamond"],
+				newPattern: ["hexagon", "circle", "hexagon"]
+			},
+			{
+				oldPattern: ["circle","diamond", "star"],
+				newPattern: ["circle", "diamond"]
+			},
+			{
+				oldPattern: ["diamond","star"],
+				newPattern: ["diamond", "circle", "circle"]
+			},
+			{
+				oldPattern: ["circle", "circle"],
+				newPattern: ["circle"]
+			},
+			{
+				oldPattern: ["triangle", "circle"],
+				newPattern: []
+			},
+			{
+				oldPattern: ["hexagon"],
+				newPattern: ["triangle"]
+			}
             ],
             target: ["square"]
 
